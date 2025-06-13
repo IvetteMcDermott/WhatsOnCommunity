@@ -50,10 +50,17 @@ INSTALLED_APPS = [
     'cloudinary',
     'cloudinary_storage',
     'django.contrib.staticfiles',
+    "crispy_forms",
+     'crispy_bootstrap5', 
     'WhatsOnCApp',
-    
     'CommunityApp'
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+# https://pypi.org/project/crispy-bootstrap5/
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

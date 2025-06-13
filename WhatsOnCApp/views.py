@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import ProviderForm,ProviderImgForm
 
 
 # Create your views here.
@@ -12,7 +13,20 @@ def detailView(request):
     return render(request, 'detailView.html')
 
 def providerForm(request):
-    return render(request, 'formRegisterProvider.html')
+    if request.method == 'POST':
+        formP= ProviderForm(request.POST)
+        formI= ProviderImgForm(request.POST, request.FILES)
+
+        if formP.is_valid() and formI.is_valid():
+            provider=formP.save()
+            image=formI.save(commit=False)
+            image.provider=provider
+            image.save()
+            return render(request,'success.html')
+    else:
+        formP=ProviderForm()
+        formI=ProviderImgForm()
+    return render(request, 'providerForm.html', {'formP':formP, 'formI': formI })
 
 def success(request):
     return render(request, 'success.html')
