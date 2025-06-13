@@ -1,0 +1,15 @@
+<div class="dropdown nav justify-content-end">
+    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Menu
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="{% url 'account_login' %}">login/if not in session</a></li>
+        <li><a class="dropdown-item" href="{% url 'account_signup' %}">signin/if not in session</a></li>
+        <li><a class="dropdown-item" href="{% url 'account_logout' %}">logout</a></li>
+        <li><a class="dropdown-item" href="{% url 'WhatsOnCApp:calendar' %}">calendar</a></li>
+        <li><a class="dropdown-item" href="{% url 'WhatsOnCApp:contactUs' %}">contactUs</a></li>
+        <li><a class="dropdown-item" href="{% url 'WhatsOnCApp:providerRegistration' %}">ProviderRegForm</a></li>
+        <li><a class="dropdown-item" href="{% url 'CommunityApp:userProfile' %}">myprofile/if authenticated</a></li>
+    </ul>
+</div>
