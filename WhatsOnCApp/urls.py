@@ -7,6 +7,7 @@ urlpatterns=[path('', views.home, name="home"),
              path('calendar/', views.listView, name="calendar"),
              path('event/', views.detailView, name="event"),
              path('providerRegistration/', views.providerForm, name="providerRegistration"),
+             path('eventPost/', views.eventForm, name="eventPost"),
              path('success/', views.success, name="success"),
              path('contactUs/', views.contactUsForm, name="contactUs"),
 ]

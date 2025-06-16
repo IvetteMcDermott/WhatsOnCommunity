@@ -5,15 +5,15 @@
 {% endblock %}
 
 {% block content %}
-<h3>provider form</h3>
+<h3>event form</h3>
 
 <div style="width: 80vw; margin-left: 10%;">
 
     <form method="POST" id="" enctype="multipart/form-data">
         {% csrf_token %}
 
-        {{ formP | crispy }}
-        {{ formI | crispy }}
+        {{ formE | crispy }}
+        {{ formIE | crispy }}
 
         <button type="submit">Save</button>
 
