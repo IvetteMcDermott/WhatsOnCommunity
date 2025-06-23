@@ -2,4 +2,10 @@
     <div><img src="https://res.cloudinary.com/dwjq6izv5/image/upload/v1749127668/WhatsOnC-NCI/logoNoBG_y38bbq.png"
             width="60" height="60" alt="logo"></div>
     <div>{% include 'includes/navbar.html' %}</div>
+    <h2>{{ user.username }}</h2>
+    {% if user.is_authenticated and user.provider.approved %}
+    <h3>Approved Provider</h3>
+    {% else %}
+    <h3>Not approved or not a provider</h3>
+    {% endif %}
 </div>
