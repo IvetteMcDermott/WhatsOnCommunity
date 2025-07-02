@@ -4,6 +4,7 @@ from . import views
 app_name="WhatsOnCApp"
 
 urlpatterns=[path('', views.home, name="home"),
+             path('events/json/', views.eventListJson, name='eventListJson'),
              path('calendar/', views.listView, name="calendar"),
              path('event/', views.detailView, name="event"),
              path('providerRegistration/', views.providerForm, name="providerRegistration"),

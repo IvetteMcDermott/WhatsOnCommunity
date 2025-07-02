@@ -1,10 +1,116 @@
 {% extends "base.html" %}
 
 {% block head %}
+<!-- FullCalendar CSS -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet" />
+<style>
+    .swal-left-align {
+        text-align: left;
+    }
+
+    /* calendar */
+    .fc-header-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+    }
+</style>
+
 
 {% endblock %}
 
 {% block content %}
-<h3>list view</h3>
-<img src="https://res.cloudinary.com/dwjq6izv5/image/upload/v1749127668/WhatsOnC-NCI/logoNoBG_y38bbq.png">
+<h3>List View</h3>
+<div id='calendar'></div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    // Function to render the data events json to calendar
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            themeSystem: 'bootstrap5',
+
+            // full calendar elements
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            initialView: 'timeGridWeek',
+            // defines the slots time to be displayed in the calendar
+            slotMinTime: '08:00:00',
+            slotMaxTime: '20:00:00',
+            // define the format for the time
+            eventTimeFormat: {
+                hour: '2-digit',
+                minute: '2-digit',
+                meridiem: 'short'
+            },
+            // function for get the json, and verify its right format or throw error
+            events: function (fetchInfo, successCallback, failureCallback) {
+                fetch('/events/json/')
+                    .then(response => {
+                        // throws error if response is not as expected
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        return response.json();
+                    })
+                    .then(data => {
+                        // map the json into event objects
+                        const events = data.map(event => ({
+                            title: event.title,
+                            start: event.start,
+                            end: event.end,
+                            when: event.when,
+                            time: event.time,
+                            category: event.category,
+                            endD: event.endDate,
+                            endT: event.endTime,
+                            location: event.location,
+                            vcode: event.vcode,
+                            description: event.description,
+                            provider: event.provider,
+                        }));
+                        // send the mapped events to the calendar 
+                        successCallback(events);
+                    })
+                    // handling error if data doesnt not load
+                    .catch(error => {
+                        console.error('Error loading events:', error);
+                        failureCallback(error);
+                    });
+            },
+
+            eventClick: function (info) {
+                const props = info.event.extendedProps;
+
+                Swal.fire({
+                    title: '📢 Port says:',
+                    html: `    <div class="swal-left-align">
+
+            <b>📌 Title:</b> ${info.event.title || ''}<br>
+            <b>📍 Location:</b> ${props.location || ''}<br>
+            <b>📅 Date:</b> ${props.when}<br>
+            <b>🕒 Time:</b> ${props.time}<br>
+            <b>🔐 VCode:</b> ${props.vcode}<br>
+            <b>🏷️ Category:</b> ${props.category}<br>
+            <b>⏳ Ends:</b> ${props.endD || ''} at ${props.endT || ''}<br>
+            <b>📝 Description:</b> ${props.description}<br>
+            <b>👤 Provider:</b> ${props.provider}
+            </div>`,
+                    icon: 'info',
+                    confirmButtonText: 'Close',
+
+                });
+            },
+        });
+
+        calendar.render();
+    });
+</script>
 {% endblock %}
