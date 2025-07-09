@@ -20,6 +20,20 @@
 
 {% block content %}
 <h3>List View</h3>
+<div id="searchCat">
+    <form id="formCat" method="GET">
+        {% csrf_token %}
+        <label for="categorySelect" id="catLabel">Filter by category:</label>
+        <select id="categorySelect" name="q" class="form-control">
+            <option value="all">All</option>
+            {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+
+        <button class="btnStyle" type="submit">Go</button>
+    </form>
+</div>
 <div id='calendar'></div>
 {% endblock %}
 
@@ -28,7 +42,33 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+
 <script>
+    let calendar;
+
+    function screenSize() {
+        const width = window.innerWidth;
+
+        let result;
+        if (width > 900) {
+            result = {
+                listMonth: { buttonText: 'Month' },
+                listWeek: { buttonText: 'Week' },
+                listDay: { buttonText: 'Day' },
+                dayGridWeek: { buttonText: 'Week Grid' },
+                dayGridMonth: { buttonText: 'Month Grid' },
+            };
+        } else {
+            result = {
+                listMonth: { buttonText: 'Month' },
+                listWeek: { buttonText: 'Week' },
+                listDay: { buttonText: 'Day' },
+            };
+
+        }
+        return result;
+    }
+
     // Function to render the data events json to calendar
     document.addEventListener('DOMContentLoaded', function () {
         var calendarEl = document.getElementById('calendar');
@@ -40,8 +80,10 @@
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                right: 'listMonth, listWeek, listDay, dayGridWeek, dayGridMonth',
             },
+            views:
+                screenSize(),
             initialView: 'listWeek',
             // defines the slots time to be displayed in the calendar
             slotMinTime: '08:00:00',
@@ -111,6 +153,44 @@
         });
 
         calendar.render();
+
+        document.getElementById('formCat').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Get the selected category
+            var selectedCategory = document.getElementById('categorySelect').value;
+
+            // Fetch events based on the selected category
+            fetch(`/events/json/?category=${encodeURIComponent(selectedCategory)}`)
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.json();
+                })
+                .then(data => {
+                    // Map the json into event objects
+                    const events = data.map(event => ({
+                        title: event.title,
+                        start: event.start,
+                        end: event.end,
+                        when: event.when,
+                        time: event.time,
+                        category: event.category,
+                        endD: event.endDate,
+                        endT: event.endTime,
+                        location: event.location,
+                        vcode: event.vcode,
+                        description: event.description,
+                        provider: event.provider,
+                    }));
+                    // Clear existing events and add new ones
+                    calendar.removeAllEvents();
+                    calendar.addEventSource(events);
+                })
+                .catch(error => {
+                    console.error('Error loading events:', error);
+                });
+        });
     });
+
 </script>
 {% endblock %}
