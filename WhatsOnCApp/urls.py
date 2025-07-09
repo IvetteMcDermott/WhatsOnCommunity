@@ -5,7 +5,7 @@ app_name="WhatsOnCApp"
 
 urlpatterns=[path('', views.home, name="home"),
              path('events/json/', views.eventListJson, name='eventListJson'),
-             path('calendar/', views.listView, name="calendar"),
+             path('calendar/', views.calendarView, name="calendar"),
              path('event/', views.detailView, name="event"),
              path('providerRegistration/', views.providerForm, name="providerRegistration"),
              path('eventPost/', views.eventForm, name="eventPost"),

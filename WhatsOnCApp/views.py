@@ -1,26 +1,38 @@
 from django.shortcuts import render, redirect
 from datetime import timedelta, datetime
+from django.db.models import Q
+
 
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 
 
-from .forms import ProviderForm,ProviderImgForm, EventForm, EventImgForm
+from .forms import ProviderForm,ProviderImgForm, EventForm, EventImgForm, CategoryForm
 from django.contrib.auth.models import User
 
-from .models import Provider, Event
+from .models import Provider, Event, Category
 
 
 # Create your views here.
 def home(request):
     return render(request, 'index.html')
 
-
+# fetch the data and convert it to Json format
 def eventListJson(request):
+    # all approved events
     events = Event.objects.filter(approved=True)
     data = []
 
+    # get the category value if the form is submitted. empty is by default 
+    categoryF=request.GET.get('category', '')
+    # render the events according to the category selected, if empty will render all 
+    if categoryF=="all" or categoryF == "":
+        events = Event.objects.filter(approved=True)
+    else:
+        events=events.filter(Q(category=categoryF))
+
+    # Jsonfy the events for the calendar
     for event in events:
         current_day = event.startDate
         while current_day <= event.endDate:
@@ -45,12 +57,16 @@ def eventListJson(request):
 
     return JsonResponse(data, safe=False)
 
-def listView(request):
-    return render(request, 'listView.html')
+# calendar
+def calendarView(request):
+    categories = Category.objects.all() 
+    formcat=CategoryForm()
+    return render(request, 'calendarView.html', {'formcat':formcat, 'categories': categories})
 
 def detailView(request):
     return render(request, 'detailView.html')
 
+# form to register as provider that requires the user has an account
 @login_required
 def providerForm(request):  
     if request.method == 'POST':
@@ -71,6 +87,7 @@ def providerForm(request):
         formI=ProviderImgForm()
     return render(request, 'providerForm.html', {'formP':formP, 'formI': formI })
 
+# form to submit an event
 @login_required 
 def eventForm(request):
     # Security in case unauthorized user access to the form, it would redirect them 
@@ -99,9 +116,11 @@ def eventForm(request):
         formIE= EventImgForm()
         return render(request, 'eventsForm.html', {'formE':formE, 'formIE':formIE})
 
+# success page after successful submission
 def success(request):
     return render(request, 'success.html')
 
+# formt to contact the staff
 def contactUsForm(request):
     return render(request, 'contactUs.html')
 

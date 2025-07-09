@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import fields, ModelForm
-from .models import Provider, Image, Event, ImageEvent
+from .models import Provider, Image, Event, ImageEvent, Category
 
 class ProviderForm(forms.ModelForm):
     
@@ -51,3 +51,6 @@ class EventImgForm(forms.ModelForm):
     class Meta:
         model=ImageEvent
         fields=('image', 'caption')
+
+class CategoryForm(forms.Form):
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label="Select a category")
