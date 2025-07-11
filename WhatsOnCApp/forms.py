@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import fields, ModelForm
-from .models import Provider, Image, Event, ImageEvent, Category
+from .models import Provider, Image, Event, ImageEvent, Category, ContactUs
 
 class ProviderForm(forms.ModelForm):
     
@@ -54,3 +54,10 @@ class EventImgForm(forms.ModelForm):
 
 class CategoryForm(forms.Form):
     category = forms.ModelChoiceField(queryset=Category.objects.all(), empty_label="Select a category")
+
+
+class ContactUsForm(forms.ModelForm):
+
+    class Meta:
+        model = ContactUs
+        exclude=['sent_at']

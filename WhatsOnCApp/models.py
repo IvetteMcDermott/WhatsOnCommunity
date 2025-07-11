@@ -42,7 +42,7 @@ class Event(models.Model):
     endTime=models.TimeField(null=False, blank=False)
     location=models.CharField(max_length=200, null=False, blank=False)
     vcode=models.CharField(max_length=10,null=False, blank=False)
-    description=models.TextField(max_length=500, null=False, blank=True)
+    description=models.TextField(max_length=800, null=False, blank=True)
     provider=models.ForeignKey(Provider, on_delete=models.CASCADE)
     approved=models.BooleanField(default=False)
 
@@ -53,3 +53,20 @@ class ImageEvent(models.Model):
     event= models.ForeignKey(Event, on_delete=models.CASCADE, related_name="event_img")
     image=CloudinaryField(max_length=255, verbose_name='imageE' )
     caption=models.CharField(max_length=200, null=False, blank=False)
+
+class ContactUs(models.Model):
+    subject = [
+              ('provider', 'About a provider'),
+              ('event', 'About an event'),
+              ('enquiry', 'General enquiry'),
+              ('claim or complain', 'Claim or Complain'),
+    ]
+     
+    name=models.CharField(max_length=200, null=False, blank=False)
+    email=models.EmailField(null=False, blank=False)
+    subject=models.CharField(max_length=30, choices=subject, null=False, blank=False)
+    description=models.TextField(max_length=800, null=False, blank=False)
+    sent_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Message {self.subject} by {self.email} on {self.sent_at}'

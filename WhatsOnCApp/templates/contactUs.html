@@ -1,11 +1,24 @@
 {% extends "base.html" %}
 
-{% block head %}
+{% load crispy_forms_tags %}
 
+{% block head %}<style>
+
+</style>
 {% endblock %}
 
 {% block content %}
 
 <h3>contact us form</h3>
+<div style="width: 80vw; margin-left: 10%;">
 
+    <form method="POST" id="" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ formCU | crispy }}
+
+        <button type="submit">Save</button>
+
+    </form>
+</div>
 {% endblock %}

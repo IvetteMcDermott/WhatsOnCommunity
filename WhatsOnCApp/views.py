@@ -2,19 +2,17 @@ from django.shortcuts import render, redirect, get_object_or_404
 from datetime import timedelta, datetime
 from django.db.models import Q
 
-
-
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 
 from CommunityApp.models import Bookmarks, UserProfile
 
 
-from .forms import ProviderForm,ProviderImgForm, EventForm, EventImgForm, CategoryForm
+from .forms import ProviderForm,ProviderImgForm, EventForm, EventImgForm, CategoryForm, ContactUsForm
 from django.contrib.auth.models import User
 
-from .models import Provider, Event, Category
+from .models import Provider, Event, Category, ContactUs
 
 
 # Create your views here.
@@ -140,8 +138,21 @@ def eventForm(request):
 def success(request):
     return render(request, 'success.html')
 
-# formt to contact the staff
+# form to contact the staff
 def contactUsForm(request):
-    return render(request, 'contactUs.html')
+    formCU = ContactUsForm()
+    if request.method == 'POST':
+        form = ContactUsForm(request.POST)
+        if form.is_valid():
+            form.save(commit=False)
+            form.save()
+            formCU = ContactUsForm()
+            return render(request, 'success.html')
+        else:
+            form = ContactUsForm()
+            return render(request, 'contactUs.html', {'formCU': formCU})
+
+
+    return render(request, 'contactUs.html', {'formCU': formCU})
 
 # admin
