@@ -1,11 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from datetime import timedelta, datetime
 from django.db.models import Q
+
 
 
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
+
+from CommunityApp.models import Bookmarks, UserProfile
 
 
 from .forms import ProviderForm,ProviderImgForm, EventForm, EventImgForm, CategoryForm
@@ -22,6 +25,7 @@ def home(request):
 def eventListJson(request):
     # all approved events
     events = Event.objects.filter(approved=True)
+
     data = []
 
     # get the category value if the form is submitted. empty is by default 
@@ -39,6 +43,7 @@ def eventListJson(request):
             start_datetime = f"{current_day}T{event.startTime}"
             end_datetime=f"{current_day}T{event.endTime}"
             data.append({
+                "id":event.id,
                 "category": event.category.name,
                 "title": event.title,
                 "start": start_datetime, 
@@ -63,8 +68,23 @@ def calendarView(request):
     formcat=CategoryForm()
     return render(request, 'calendarView.html', {'formcat':formcat, 'categories': categories})
 
-def detailView(request):
-    return render(request, 'detailView.html')
+def detailView(request, id, *args, **kwargs):
+    event=get_object_or_404(Event, id=id)
+    event_images = event.event_img.all()
+    bookmarked=False
+    
+    if request.user.is_authenticated:
+        if not request.user.is_staff:
+            user = UserProfile.objects.get(user=request.user)
+            bookmarke = Bookmarks.objects.filter(
+            user=user, event=event).exists()
+
+            if bookmarke:
+                bookmarked = True
+            else:
+                bookmarked = False
+    
+    return render(request, 'detailView.html',{'event':event,'event_images': event_images, 'id':id, 'bookmarked':bookmarked})
 
 # form to register as provider that requires the user has an account
 @login_required

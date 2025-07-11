@@ -6,6 +6,71 @@
 
 {% block content %}
 
-<h3>details view</h3>
+<h3 class="mt-4 ms-3">Event Details</h3>
+<div class="d-flex" id="eventDiv">
+    {% if event_images %}
+    {% for image in event_images %}
+    <div class="eventSDiv ">
+        <img src="{{image.image.url}}" alt="{{ event.title }}" id="eventImageCss">{% endfor%}
+        {% endif %}
+    </div>
+    <div class="eventSDiv" id="dataDiv">
+        <div id="title">
+            <h1>{{ event.title }}</h1>
 
+            {% if user.is_authenticated and not request.user.is_staff %}
+            <form method="POST" action="{% url 'CommunityApp:bookmark' event.id %}">
+                {% csrf_token %}
+                {% if bookmarked %}
+                <button type="submit" name="bookmark" value="{{event.id}}">
+                    <i style="width: 2rem;" class="fa-regular fa-bookmark fa-2x"></i><small>Bookmarked</small>
+                </button>
+                {% else %}
+                <button type="submit" name="bookmark" value="event.id">
+                    <i style="width: 2rem;" class="fa-regular fa-bookmark fa-2x"></i><small>Bookmark it</small>
+                </button>
+                {% endif %}
+            </form>
+            {% endif %}
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        Location </td>
+                    <td> : </td>
+                    <td class="ps-3">{{ event.location }}</td>
+                </tr>
+                <tr>
+                    <td>Date</td>
+                    <td> : </td>
+                    <td class="ps-3">{{ event.startDate }}</td>
+                </tr>
+                <tr>
+                    <td>Time </td>
+                    <td> : </td>
+                    <td class="ps-3">{{ event.startTime }}</td>
+                </tr>
+                <tr>
+                    <td>endDate</td>
+                    <td> : </td>
+                    <td class="ps-3">{{ event.endDate }}</td>
+                </tr>
+                <tr>
+                    <td>vcode</td>
+                    <td> : </td>
+                    <td class="ps-3">{{ event.vcode }}</td>
+                </tr>
+                <tr>
+                    <td>provider</td>
+                    <td> : </td>
+                    <td class="ps-3">{{ event.provider }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="eventExtraDiv">
+    <p>description: {{ event.description }}</p>
+</div>
 {% endblock %}
