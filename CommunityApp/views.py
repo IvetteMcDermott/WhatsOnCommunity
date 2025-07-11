@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from .models import UserProfile, Bookmarks
-from WhatsOnCApp.models import Event
+from WhatsOnCApp.models import Event, Provider
 from django.contrib.auth.models import User
 
 
@@ -18,8 +18,11 @@ def userProfile(request):
     return render(request, 'userProfile.html', {'userP': user,
 'bookmarks': bookmarks})
 
-def providerProfile(request):
-    return render(request, 'providerProfile.html')
+def providerProfile(request, id):
+
+    provider=get_object_or_404(Provider, id=id)
+    provider_imgs=provider.provider_img.all()
+    return render(request, 'providerProfile.html', {'provider':provider, 'provider_imgs': provider_imgs})
 
 @login_required
 def bookmarking(request, id):
