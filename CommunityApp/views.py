@@ -12,7 +12,11 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def userProfile(request):
 
-    return render(request, 'userProfile.html')
+    user = get_object_or_404(UserProfile, user=request.user)
+    bookmarks = Bookmarks.objects.filter(user=user)
+
+    return render(request, 'userProfile.html', {'userP': user,
+'bookmarks': bookmarks})
 
 def providerProfile(request):
     return render(request, 'providerProfile.html')

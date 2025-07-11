@@ -6,6 +6,43 @@
 
 {% block content %}
 
-<h3>user profile</h3>
+<h3>My Bookmarks</h3>
+
+
+<div class="d-flex flex-wrap justify-content-evenly">
+    {% if bookmarks %}
+
+    {% for bookmark in bookmarks %}
+    <div class="cardBookmark">
+        <a href="{% url 'WhatsOnCApp:event' bookmark.event.id %}"> {{ bookmark.event.title }} </a>
+        <table>
+            <tr>
+                <td>
+                    Location </td>
+                <td> : </td>
+                <td class="ps-3">{{ bookmark.event.location }}</td>
+            </tr>
+            <tr>
+                <td>Date</td>
+                <td> : </td>
+                <td class="ps-3">{{ bookmark.event.startDate }}</td>
+            </tr>
+            <tr>
+                <td>Time </td>
+                <td> : </td>
+                <td class="ps-3">{{ bookmark.event.startTime }}</td>
+            </tr>
+
+            <tr>
+                <td>provider</td>
+                <td> : </td>
+                <td class="ps-3">{{ bookmark.event.provider }}</td>
+            </tr>
+        </table>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+
 
 {% endblock %}
