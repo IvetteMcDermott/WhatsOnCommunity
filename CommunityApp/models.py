@@ -4,20 +4,11 @@ from WhatsOnCApp.models import Event
 
 # Create your models here.
 
-class Role(models.Model):
-    
-    type=models.CharField(max_length=30, null=False, blank=False)
-
-    def __str__(self):
-        return self.type
-
 class UserProfile(models.Model):
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    role= models.ForeignKey(Role, on_delete=models.CASCADE)
     name = models.CharField(max_length=50, null=True, blank=True)
-    email = models.EmailField(max_length=254, null=True, blank=True)
-    location = models.CharField(max_length=40, null=True, blank=True)
+   
     
     def __str__(self):
         return str(self.name)

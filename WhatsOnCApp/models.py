@@ -50,6 +50,6 @@ class Event(models.Model):
         return self.title
     
 class ImageEvent(models.Model):
-    event= models.ForeignKey(Event, on_delete=models.CASCADE, related_name="provider_img")
-    image=CloudinaryField(max_length=255, verbose_name='image' )
+    event= models.ForeignKey(Event, on_delete=models.CASCADE, related_name="event_img")
+    image=CloudinaryField(max_length=255, verbose_name='imageE' )
     caption=models.CharField(max_length=200, null=False, blank=False)
