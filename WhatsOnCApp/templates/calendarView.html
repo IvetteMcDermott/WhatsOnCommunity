@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
+
 
 {% block head %}
 <!-- FullCalendar CSS -->
@@ -19,11 +21,11 @@
 {% endblock %}
 
 {% block content %}
-<h3>List View</h3>
+<h3 class="mt-4 ms-3">Calendar</h3>
 <div id="searchCat">
     <form id="formCat" method="GET">
         {% csrf_token %}
-        <label for="categorySelect" id="catLabel">Filter by category:</label>
+        <label for="categorySelect" id="catLabel" class="me-4">Filter by category:</label>
         <select id="categorySelect" name="q" class="form-control">
             <option value="all">All</option>
             {% for category in categories %}
@@ -105,6 +107,7 @@
                     .then(data => {
                         // map the json into event objects
                         const events = data.map(event => ({
+                            id: event.id,
                             title: event.title,
                             start: event.start,
                             end: event.end,
@@ -130,25 +133,20 @@
 
             eventClick: function (info) {
                 const props = info.event.extendedProps;
+                const id = info.event.id;
 
                 Swal.fire({
                     title: '📢 Port says:',
-                    html: `    <div class="swal-left-align">
-
-            <b>📌 Title:</b> ${info.event.title || ''}<br>
+                    html: `
+        <div class="swal-left-align">
+            <b>📌 Title:</b> <a href="/event/${id}/">${info.event.title || ''}</a><br>
             <b>📍 Location:</b> ${props.location || ''}<br>
             <b>📅 Date:</b> ${props.when}<br>
             <b>🕒 Time:</b> ${props.time}<br>
-            <b>🔐 VCode:</b> ${props.vcode}<br>
-            <b>🏷️ Category:</b> ${props.category}<br>
-            <b>⏳ Ends:</b> ${props.endD || ''} at ${props.endT || ''}<br>
-            <b>📝 Description:</b> ${props.description}<br>
-            <b>👤 Provider:</b> ${props.provider}
-            </div>`,
-                    icon: 'info',
-                    confirmButtonText: 'Close',
-
+        </div>
+    `,
                 });
+
             },
         });
 
@@ -161,7 +159,7 @@
             var selectedCategory = document.getElementById('categorySelect').value;
 
             // Fetch events based on the selected category
-            fetch(`/events/json/?category=${encodeURIComponent(selectedCategory)}`)
+            fetch(`/ events / json /? category = ${encodeURIComponent(selectedCategory)}`)
                 .then(response => {
                     if (!response.ok) throw new Error('Network response was not ok');
                     return response.json();
@@ -169,6 +167,7 @@
                 .then(data => {
                     // Map the json into event objects
                     const events = data.map(event => ({
+                        id: event.id,
                         title: event.title,
                         start: event.start,
                         end: event.end,
@@ -181,6 +180,7 @@
                         vcode: event.vcode,
                         description: event.description,
                         provider: event.provider,
+
                     }));
                     // Clear existing events and add new ones
                     calendar.removeAllEvents();
