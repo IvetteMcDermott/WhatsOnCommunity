@@ -11,9 +11,11 @@
     {% if event_images %}
     {% for image in event_images %}
     <div class="eventSDiv ">
-        <img src="{{image.image.url}}" alt="{{ event.title }}" id="eventImageCss">{% endfor%}
-        {% endif %}
+        <img src="{{image.image.url}}" alt="{{ event.title }}" id="eventImageCss">
     </div>
+    {% endfor%}
+    {% endif %}
+
     <div class="eventSDiv" id="dataDiv">
         <div id="title">
             <h1>{{ event.title }}</h1>
@@ -64,7 +66,10 @@
                 <tr>
                     <td>provider</td>
                     <td> : </td>
-                    <td class="ps-3">{{ event.provider }}</td>
+                    <td class="ps-3">
+                        <a href="{% url 'CommunityApp:providerProfile' event.provider.id %}"> {{ event.provider }}
+                        </a>
+                    </td>
                 </tr>
             </table>
         </div>
