@@ -67,6 +67,7 @@ class ContactUs(models.Model):
     subject=models.CharField(max_length=30, choices=subject, null=False, blank=False)
     description=models.TextField(max_length=800, null=False, blank=False)
     sent_at = models.DateTimeField(auto_now_add=True)
+    solved=models.BooleanField(default=False)
 
     def __str__(self):
         return f'Message {self.subject} by {self.email} on {self.sent_at}'
