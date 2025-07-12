@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>CONTROL PANEL</h3>
+
+<div class="controlPanelDiv">
+    <h5>Providers Applications</h5>
+    <div class="sectionsCP providers">
+        {% if providersApps %}
+        <table>
+            {% for app in providersApps %}
+            <tr>
+                <td> <a href="{% url 'CommunityApp:providerProfile' app.id %}"> {{ app.name }}
+                </td>
+                <td></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+        {% endif %}
+    </div>
+    <h5>Events Applications</h5>
+    <div class="sectionsCP events">
+        {% if eventsApps %}
+        <table>
+            {% for app in eventsApps %}
+            <tr>
+                <td> <a href="{% url 'WhatsOnCApp:event' app.id %}"> {{ app.title }}
+                </td>
+                <td></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+        {% endif %}
+    </div>
+    <h5>Messages</h5>
+    <div class="sectionsCP messages">
+        {% if messagesIn %}
+        <table>
+            {% for message in messagesIn %}
+            <tr>
+                <td>
+                    <a href="#">{{ message.subject }}</a>
+                </td>
+                <td>
+                    <form method="POST" action="{% url 'WhatsOnCApp:solvedCU' message.id %}">
+                        {% csrf_token %}
+                        <label for="solved_{{message.id}}">Solved</label>
+                        <input type="checkbox" id="solved_{{message.id}}" name="solved" value="{{ message.id }}">
+                        <button type="submit">Go</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

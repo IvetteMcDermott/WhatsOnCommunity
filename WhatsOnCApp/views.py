@@ -9,7 +9,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from CommunityApp.models import Bookmarks, UserProfile
 
 
-from .forms import ProviderForm,ProviderImgForm, EventForm, EventImgForm, CategoryForm, ContactUsForm
+from .forms import ProviderForm,ProviderImgForm, EventForm, EventImgForm, CategoryForm, ContactUsForm, SolvedCU
 from django.contrib.auth.models import User
 
 from .models import Provider, Event, Category, ContactUs
@@ -155,4 +155,25 @@ def contactUsForm(request):
 
     return render(request, 'contactUs.html', {'formCU': formCU})
 
+def solvedContactUs(request, id):
+    
+    message=get_object_or_404(ContactUs, id=id)
+    print(message)
+    print(id)
+    
+    if request.method=='POST':
+        if 'solved' in request.POST:
+            message.solved=True
+            message.save()
+
+        else:
+            message.solved=False
+    return redirect('WhatsOnCApp:controlPanel') 
+
 # admin
+@staff_member_required
+def controlPanel(request):
+    providersApps=Provider.objects.filter(approved=0)
+    eventsApps=Event.objects.filter(approved=0)
+    messagesIn=ContactUs.objects.filter(solved=False)
+    return render(request, "controlPanel.html", {'providersApps': providersApps, 'eventsApps': eventsApps, 'messagesIn':messagesIn})

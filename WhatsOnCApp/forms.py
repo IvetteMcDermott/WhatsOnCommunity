@@ -60,4 +60,10 @@ class ContactUsForm(forms.ModelForm):
 
     class Meta:
         model = ContactUs
-        exclude=['sent_at']
+        exclude=['sent_at', 'solved']
+
+class SolvedCU(forms.ModelForm):
+
+    class Meta:
+        model = ContactUs
+        fields=('solved',)
