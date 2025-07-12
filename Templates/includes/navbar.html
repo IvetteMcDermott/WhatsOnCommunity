@@ -4,29 +4,38 @@
         Menu
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <!-- If user in session is logged -->
+        <!-- if not logged -->
+        {% if not user.is_authenticated %}
+        <li><a class="dropdown-item" href="{% url 'account_signup' %}">Sign Up</a></li>
+        <li><a class="dropdown-item" href="{% url 'account_login' %}">Sign In</a></li>
+        {% endif %}
+        {% if user.is_staff %}
+        <!-- if staff -->
+        <li><a class="dropdown-item" href="{% url 'WhatsOnCApp:controlPanel' %}">Control Panel</a></li>
+        {% endif %}
         {% if user.is_authenticated %}
         <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
-        <li><a class="dropdown-item" href="{% url 'CommunityApp:userProfile' %}">My Profile</a></li>
-        <!-- if user is not staff and then check if is provider -->
         {% if not user.is_staff %}
+        <li><a class="dropdown-item" href="{% url 'CommunityApp:userProfile' %}">My Profile</a></li>
+
         {% if user.provider.approved %}
+
         <li><a class="dropdown-item" href="{% url 'WhatsOnCApp:eventPost' %}">Post an Event</a></li>
         <!-- if not staff either provider, so regular user -->
         {% else %}
         <li><a class="dropdown-item" href="{% url 'WhatsOnCApp:providerRegistration' %}">Provider Registration</a></li>
         {% endif %}
-        {% else %}
-        <!-- if staff -->
-        <li><a class="dropdown-item" href="">Control Panel</a></li>
         {% endif %}
-        <!-- if not logged -->
-        {% else %}
-        <li><a class="dropdown-item" href="{% url 'account_signup' %}">Sign Up</a></li>
-        <li><a class="dropdown-item" href="{% url 'account_login' %}">Sign In</a></li>
         {% endif %}
+
         <!-- all users -->
         <li><a class="dropdown-item" href="{% url 'WhatsOnCApp:calendar' %}">Calendar</a></li>
+        <!-- If user in session is logged -->
+
+        <!-- if user is not staff and then check if is provider -->
+        {% if not user.is_staff %}
         <li><a class="dropdown-item" href="{% url 'WhatsOnCApp:contactUs' %}">Contact Us</a></li>
+
+        {% endif %}
     </ul>
 </div>
