@@ -26,7 +26,8 @@
     <form id="formCat" method="GET">
         {% csrf_token %}
         <label for="categorySelect" id="catLabel" class="me-4">Filter by category:</label>
-        <select id="categorySelect" name="q" class="form-control">
+
+        <select id="categorySelect" name="category" class="form-control">
             <option value="all">All</option>
             {% for category in categories %}
             <option value="{{ category.id }}">{{ category.name }}</option>
@@ -98,7 +99,7 @@
             },
             // function for get the json, and verify its right format or throw error
             events: function (fetchInfo, successCallback, failureCallback) {
-                fetch('/events/json/')
+                fetch(`/events/json/`)
                     .then(response => {
                         // throws error if response is not as expected
                         if (!response.ok) throw new Error('Network response was not ok');
@@ -159,7 +160,7 @@
             var selectedCategory = document.getElementById('categorySelect').value;
 
             // Fetch events based on the selected category
-            fetch(`/ events / json /? category = ${encodeURIComponent(selectedCategory)}`)
+            fetch(`/events/json/?category=${encodeURIComponent(selectedCategory)}`)
                 .then(response => {
                     if (!response.ok) throw new Error('Network response was not ok');
                     return response.json();

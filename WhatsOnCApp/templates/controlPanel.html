@@ -9,11 +9,24 @@
     <div class="sectionsCP providers">
         {% if providersApps %}
         <table>
+            <th style="width:25%;">Id</th>
+            <th style="width:35%;">Name</th>
+            <th style="width:75%; align-items: end;">Approve</th>
             {% for app in providersApps %}
             <tr>
+                <td>{{ app.id }}</td>
                 <td> <a href="{% url 'CommunityApp:providerProfile' app.id %}"> {{ app.name }}
                 </td>
-                <td></td>
+                <td>
+                    <form class="d-inline-flex" method="POST" action="{% url 'WhatsOnCApp:approveProv' app.id %}">
+                        {% csrf_token %}
+                        <label for="approved_{{app.id}}"></label>
+                        <input type="checkbox" id="approved_{{app.id}}" name="approved" value="{{ app.id }}"
+                            style="margin-right: 0.5rem;">
+                        <button type="submit">Approved</button>
+                    </form>
+                </td>
+                </td>
             </tr>
             {% endfor %}
 
@@ -24,11 +37,23 @@
     <div class="sectionsCP events">
         {% if eventsApps %}
         <table>
+            <th style="width:25%;">Id</th>
+            <th style="width:35%;">Name</th>
+            <th style="width:75%; align-items: end;">Approve</th>
             {% for app in eventsApps %}
             <tr>
+                <td>{{ app.id }}</td>
                 <td> <a href="{% url 'WhatsOnCApp:event' app.id %}"> {{ app.title }}
                 </td>
-                <td></td>
+                <td>
+                    <form method="POST" action="{% url 'WhatsOnCApp:approveEv' app.id %}" class="d-inline-flex">
+                        {% csrf_token %}
+                        <label for="approved_{{app.id}}"></label>
+                        <input type="checkbox" id="approved_{{app.id}}" name="approved" value="{{ app.id }}"
+                            style="margin-right: 0.5rem;">
+                        <button type="submit">Approved</button>
+                    </form>
+                </td>
             </tr>
             {% endfor %}
 
@@ -39,17 +64,24 @@
     <div class="sectionsCP messages">
         {% if messagesIn %}
         <table>
+            <th style="width:10%;">Id</th>
+            <th style="width:25%;">Sent In</th>
+            <th style="width:35%;">Subject</th>
+            <th style="width:30%; align-items: end;">Approve</th>
             {% for message in messagesIn %}
             <tr>
+                <td>{{ message.id }}</td>
+                <td style="margin-right: 0.8rem;">{{ message.sent_at|date:"d-m" }}</td>
+
                 <td>
-                    <a href="#">{{ message.subject }}</a>
+                    <a href="{% url 'WhatsOnCApp:messageCU' message.id %}">{{ message.subject }}</a>
                 </td>
                 <td>
-                    <form method="POST" action="{% url 'WhatsOnCApp:solvedCU' message.id %}">
+                    <form method="POST" action="{% url 'WhatsOnCApp:solvedCU' message.id %}" class="d-inline-flex">
                         {% csrf_token %}
-                        <label for="solved_{{message.id}}">Solved</label>
+                        <label for="solved_{{message.id}}"></label>
                         <input type="checkbox" id="solved_{{message.id}}" name="solved" value="{{ message.id }}">
-                        <button type="submit">Go</button>
+                        <button type="submit">Solved</button>
                     </form>
                 </td>
             </tr>

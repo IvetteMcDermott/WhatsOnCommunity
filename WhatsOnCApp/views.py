@@ -29,7 +29,7 @@ def eventListJson(request):
     # get the category value if the form is submitted. empty is by default 
     categoryF=request.GET.get('category', '')
     # render the events according to the category selected, if empty will render all 
-    if categoryF=="all" or categoryF == "":
+    if categoryF=="all" or categoryF == " ":
         events = Event.objects.filter(approved=True)
     else:
         events=events.filter(Q(category=categoryF))
@@ -134,6 +134,9 @@ def eventForm(request):
         formIE= EventImgForm()
         return render(request, 'eventsForm.html', {'formE':formE, 'formIE':formIE})
 
+
+
+
 # success page after successful submission
 def success(request):
     return render(request, 'success.html')
@@ -152,25 +155,55 @@ def contactUsForm(request):
             form = ContactUsForm()
             return render(request, 'contactUs.html', {'formCU': formCU})
 
-
     return render(request, 'contactUs.html', {'formCU': formCU})
 
+def messageContactUs(request, id):
+    message=get_object_or_404(ContactUs, id=id)
+
+    return render(request, "messageContactUs.html",{'message': message})
+
+
+# ADMIN
+
+@staff_member_required
 def solvedContactUs(request, id):
     
     message=get_object_or_404(ContactUs, id=id)
-    print(message)
-    print(id)
-    
+       
     if request.method=='POST':
         if 'solved' in request.POST:
             message.solved=True
             message.save()
-
         else:
             message.solved=False
     return redirect('WhatsOnCApp:controlPanel') 
 
-# admin
+@staff_member_required
+def ApproveProv(request, id):
+    
+    provider=get_object_or_404(Provider, id=id)
+       
+    if request.method=='POST':
+        if 'approved' in request.POST:
+            provider.approved=True
+            provider.save()
+        else:
+            provider.approved=False
+    return redirect('WhatsOnCApp:controlPanel') 
+
+@staff_member_required
+def ApproveEv(request, id):
+    
+    event=get_object_or_404(Event, id=id)
+       
+    if request.method=='POST':
+        if 'approved' in request.POST:
+            event.approved=True
+            event.save()
+        else:
+            event.approved=False
+    return redirect('WhatsOnCApp:controlPanel') 
+
 @staff_member_required
 def controlPanel(request):
     providersApps=Provider.objects.filter(approved=0)

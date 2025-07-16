@@ -67,3 +67,16 @@ class SolvedCU(forms.ModelForm):
     class Meta:
         model = ContactUs
         fields=('solved',)
+
+
+class ApproveProv(forms.ModelForm):
+
+    class Meta:
+        model = Provider
+        fields=('approved',)
+
+class ApproveEv(forms.ModelForm):
+
+    class Meta:
+        model = Event
+        fields=('approved',)
