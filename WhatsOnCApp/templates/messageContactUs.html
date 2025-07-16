@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>MESSAGE</h3>
+<div class="cardBookmark">
+    <table>
+        <tr>
+            <td>Sender :</td>
+            <td>{{ message.name }}</td>
+        <tr>
+            <td>Sent On :</td>
+            <td>{{ message.sent_at }}</td>
+        </tr>
+        <tr>
+            <td>Subject :</td>
+            <td>{{ message.subject }} </td>
+        </tr>
+        <tr>
+            <td>Message :</td>
+            <td>{{ message.description|truncatewords:10 }}</td>
+        </tr>
+
+
+    </table>
+</div>
+<a id="theBtn" href='{% url "WhatsOnCApp:controlPanel" %}'>back</a>
+
+{% endblock %}
