@@ -29,7 +29,7 @@ def eventListJson(request):
     # get the category value if the form is submitted. empty is by default 
     categoryF=request.GET.get('category', '')
     # render the events according to the category selected, if empty will render all 
-    if categoryF=="all" or categoryF == " ":
+    if categoryF=="all" or categoryF == "":
         events = Event.objects.filter(approved=True)
     else:
         events=events.filter(Q(category=categoryF))
@@ -55,9 +55,7 @@ def eventListJson(request):
                 "description": event.description,
                 "provider": event.provider.name,
             })
-
             current_day += timedelta(days=1)
-
     return JsonResponse(data, safe=False)
 
 # calendar
