@@ -21,7 +21,9 @@
         <li><a class="dropdown-item" href="{% url 'WhatsOnCApp:eventPost' %}">Post an Event</a></li>
         <!-- if not staff either provider, so regular user -->
         {% else %}
+        {% if not user.provider %}
         <li><a class="dropdown-item" href="{% url 'WhatsOnCApp:providerRegistration' %}">Provider Registration</a></li>
+        {% endif %}
         {% endif %}
         {% endif %}
         {% endif %}
