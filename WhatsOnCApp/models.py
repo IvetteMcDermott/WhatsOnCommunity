@@ -16,7 +16,7 @@ class Category(models.Model):
         return self.name
 
 class Provider(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, blank=True)
     name=models.CharField(max_length=100, blank=False, null=False)
     phone=models.IntegerField(blank=False, null=False)
     email=models.EmailField(null=False, blank=False)
