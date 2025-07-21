@@ -42,21 +42,48 @@
 
 <body>
     <div class="wrapper" style="min-height: 92vh; max-width: 98vw;">
+
         {% block header %}
 
 
         {% endblock %}
+        {% if messages %}
+
+        {% for message in messages %}
+
+        <div class="alert alert-{{ message.tags }} alert-css message" data="modal" data-toggle="modal" role="alert">
+            {{ message }}
+
+        </div>
+        {% endfor %}
+
+        {% endif %}
         {% include 'includes/header_logo.html' %}
 
         {% block content %}
+
         {% endblock %}
+
     </div>
+
     <footer>
         {% include 'includes/footer.html' %}
     </footer>
-    {% block scripts %}{% endblock %}
+    {% block scripts %}
+    {% endblock %}
+
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            const alerts = document.querySelectorAll(".alert");
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.style.display = "none";
+                }, 4000);  // 4 seconds
+            });
+        });
+    </script>
 </body>
 
-</body>
+
 
 </html>

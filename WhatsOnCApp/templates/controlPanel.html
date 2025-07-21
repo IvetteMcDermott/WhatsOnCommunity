@@ -26,6 +26,15 @@
                         <button type="submit">Approved</button>
                     </form>
                 </td>
+                <td>
+                    <form class="d-inline-flex" method="GET"
+                        action="{% url 'WhatsOnCApp:deleteProvApplication' app.id %}">
+                        {% csrf_token %}
+                        <label for="delete_{{app.id}}"></label>
+                        <input type="checkbox" id="delete_{{app.id}}" name="application" value="{{ app.id }}"
+                            style="margin-right: 0.5rem;">
+                        <button type="submit">Delete Appl</button>
+                    </form>
                 </td>
             </tr>
             {% endfor %}
@@ -54,6 +63,16 @@
                         <button type="submit">Approved</button>
                     </form>
                 </td>
+                <td>
+                    <form class="d-inline-flex" method="GET"
+                        action="{% url 'WhatsOnCApp:deleteEventApplication' app.id %}">
+                        {% csrf_token %}
+                        <label for="delete_{{app.id}}"></label>
+                        <input type="checkbox" id="delete_{{app.id}}" name="application" value="{{ app.id }}"
+                            style="margin-right: 0.5rem;">
+                        <button type="submit">Delete Event</button>
+                    </form>
+                </td>
             </tr>
             {% endfor %}
 
@@ -66,13 +85,13 @@
         <table>
             <th style="width:10%;">Id</th>
             <th style="width:25%;">Sent In</th>
+
             <th style="width:35%;">Subject</th>
             <th style="width:30%; align-items: end;">Approve</th>
             {% for message in messagesIn %}
             <tr>
                 <td>{{ message.id }}</td>
                 <td style="margin-right: 0.8rem;">{{ message.sent_at|date:"d-m" }}</td>
-
                 <td>
                     <a href="{% url 'WhatsOnCApp:messageCU' message.id %}">{{ message.subject }}</a>
                 </td>
@@ -84,6 +103,7 @@
                         <button type="submit">Solved</button>
                     </form>
                 </td>
+                <td></td>
             </tr>
             {% endfor %}
         </table>

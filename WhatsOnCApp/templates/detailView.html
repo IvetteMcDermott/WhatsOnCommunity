@@ -15,6 +15,13 @@
     </div>
     {% endfor%}
     {% endif %}
+    {% if request.user == event.provider.user %}
+    <form method="POST" action="{% url 'WhatsOnCApp:editEvent' event.id %}"> {% csrf_token %}
+        <button type="submit" name="editPost" value="event.id">
+            <i style="width: 2rem;"></i><small>Edit it</small>
+        </button>
+    </form>
+    {% endif %}
 
     <div class="eventSDiv" id="dataDiv">
         <div id="title">

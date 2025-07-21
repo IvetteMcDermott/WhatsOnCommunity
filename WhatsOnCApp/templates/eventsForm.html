@@ -11,13 +11,17 @@
 
     <form method="POST" id="" enctype="multipart/form-data">
         {% csrf_token %}
-
+        <!-- post event form -->
         {{ formE | crispy }}
         {{ formIE | crispy }}
+        <!-- edit form -->
+        {{ form | crispy }}
 
         <button type="submit">Save</button>
 
     </form>
+
+    <form method="POST" id="" enctype="multipart/form-data"></form>
 </div>
 
 {% endblock %}

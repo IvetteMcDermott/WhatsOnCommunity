@@ -46,6 +46,40 @@ class EventForm(forms.ModelForm):
             }
         )
 
+
+class EditEventForm(forms.ModelForm):
+
+    class Meta:
+        model= Event
+        exclude=['category', 'title', 'approved', 'provider']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['startDate'].widget = forms.DateInput(
+            attrs={
+                'type': 'date', 
+                'class': 'form-control',
+            }
+        )
+        self.fields['startTime'].widget = forms.TimeInput(
+            attrs={
+                'type': 'time',  
+                'class': 'form-control',
+            }
+        )
+        self.fields['endDate'].widget = forms.DateInput(
+            attrs={
+                'type': 'date', 
+                'class': 'form-control',
+            }
+        )
+        self.fields['endTime'].widget = forms.TimeInput(
+            attrs={
+                'type': 'time',  
+                'class': 'form-control',
+            }
+        )
+
 class EventImgForm(forms.ModelForm):
 
     class Meta:

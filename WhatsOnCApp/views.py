@@ -2,14 +2,16 @@ from django.shortcuts import render, redirect, get_object_or_404
 from datetime import timedelta, datetime
 from django.db.models import Q
 
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
+
 from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 
 from CommunityApp.models import Bookmarks, UserProfile
 
-
-from .forms import ProviderForm,ProviderImgForm, EventForm, EventImgForm, CategoryForm, ContactUsForm, SolvedCU
+from .forms import ProviderForm,ProviderImgForm, EventForm, EventImgForm, CategoryForm, ContactUsForm, SolvedCU, EditEventForm
 from django.contrib.auth.models import User
 
 from .models import Provider, Event, Category, ContactUs
@@ -77,14 +79,31 @@ def detailView(request, id, *args, **kwargs):
 
             if bookmarke:
                 bookmarked = True
+                messages.success(request, 'You had bookmarked the event successfully!')
             else:
                 bookmarked = False
+                messages.success(request, 'Your bookmarked had been removed!')
     
     return render(request, 'detailView.html',{'event':event,'event_images': event_images, 'id':id, 'bookmarked':bookmarked})
 
+def editEvent(request, id):
+    event = get_object_or_404(Event, id=id)
+    form=EditEventForm()
+    if request.method=='POST':
+        form=EditEventForm(request.POST, request.FILES, instance=event)
+        if form.is_valid():
+            form.save(commit=False)
+            form.save()
+            messages.success(request,'Your event had been edited successfully!')
+            return redirect ('/calendar/')
+        
+        form = EditEventForm(instance=event)
+    return render(request, 'eventsForm.html',{"form":form, "event":event})
+
 # form to register as provider that requires the user has an account
 @login_required
-def providerForm(request):  
+def providerForm(request): 
+  
     if request.method == 'POST':
         formP= ProviderForm(request.POST)
         formI= ProviderImgForm(request.POST, request.FILES)
@@ -97,10 +116,13 @@ def providerForm(request):
             image=formI.save(commit=False)
             image.provider=provider
             image.save()
+            messages.success(request,'Your application had been sent successfully!')
             return render(request,'success.html')
     else:
         formP=ProviderForm()
         formI=ProviderImgForm()
+        messages.error(request,'Your application needs to be review!')
+
     return render(request, 'providerForm.html', {'formP':formP, 'formI': formI })
 
 # form to submit an event
@@ -126,14 +148,12 @@ def eventForm(request):
             imageEvent=formIE.save(commit=False)
             imageEvent.event=event
             imageEvent.save()
+            messages.success(request,'Your event had been sent successfully!')
             return render(request, 'success.html')
     else:
         formE= EventForm()
         formIE= EventImgForm()
         return render(request, 'eventsForm.html', {'formE':formE, 'formIE':formIE})
-
-
-
 
 # success page after successful submission
 def success(request):
@@ -147,8 +167,9 @@ def contactUsForm(request):
         if form.is_valid():
             form.save(commit=False)
             form.save()
+            messages.success(request,'Your enquiry had been sent successfully!')
             formCU = ContactUsForm()
-            return render(request, 'success.html')
+            return redirect('WhatsOnCApp:home')
         else:
             form = ContactUsForm()
             return render(request, 'contactUs.html', {'formCU': formCU})
@@ -172,6 +193,8 @@ def solvedContactUs(request, id):
         if 'solved' in request.POST:
             message.solved=True
             message.save()
+            messages.success(request,'Marked solved successfully!')
+
         else:
             message.solved=False
     return redirect('WhatsOnCApp:controlPanel') 
@@ -185,6 +208,7 @@ def ApproveProv(request, id):
         if 'approved' in request.POST:
             provider.approved=True
             provider.save()
+            messages.success(request,'Provider approved successfully!')
         else:
             provider.approved=False
     return redirect('WhatsOnCApp:controlPanel') 
@@ -198,8 +222,25 @@ def ApproveEv(request, id):
         if 'approved' in request.POST:
             event.approved=True
             event.save()
+            messages.success(request,'Event approved successfully!')
         else:
             event.approved=False
+    return redirect('WhatsOnCApp:controlPanel') 
+
+def deleteProvApplication(request, id):
+
+    if request.method=='GET':
+        provider=get_object_or_404(Provider, id=id)
+        provider.delete()
+        messages.success(request,'Provider application deleted!')
+    return redirect('WhatsOnCApp:controlPanel') 
+
+def deleteEventApplication(request, id):
+
+    if request.method=='GET':
+        event= get_object_or_404(Event, id=id)
+        event.delete()
+        messages.success(request,'Event application deleted!')
     return redirect('WhatsOnCApp:controlPanel') 
 
 @staff_member_required
