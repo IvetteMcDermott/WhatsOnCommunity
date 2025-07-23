@@ -79,10 +79,8 @@ def detailView(request, id, *args, **kwargs):
 
             if bookmarke:
                 bookmarked = True
-                messages.success(request, 'You had bookmarked the event successfully!')
             else:
                 bookmarked = False
-                messages.success(request, 'Your bookmarked had been removed!')
     
     return render(request, 'detailView.html',{'event':event,'event_images': event_images, 'id':id, 'bookmarked':bookmarked})
 
@@ -121,7 +119,6 @@ def providerForm(request):
     else:
         formP=ProviderForm()
         formI=ProviderImgForm()
-        messages.error(request,'Your application needs to be review!')
 
     return render(request, 'providerForm.html', {'formP':formP, 'formI': formI })
 

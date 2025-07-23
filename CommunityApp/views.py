@@ -3,6 +3,8 @@ from django.http import HttpResponseRedirect
 from .models import UserProfile, Bookmarks
 from WhatsOnCApp.models import Event, Provider
 from django.contrib.auth.models import User
+from django.contrib import messages
+
 
 
 from django.contrib.auth.decorators import login_required
@@ -11,7 +13,6 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required
 def userProfile(request):
-
     user = get_object_or_404(UserProfile, user=request.user)
     bookmarks = Bookmarks.objects.filter(user=user)
 
@@ -19,7 +20,6 @@ def userProfile(request):
 'bookmarks': bookmarks})
 
 def providerProfile(request, id):
-
     provider=get_object_or_404(Provider, id=id)
     provider_imgs=provider.provider_img.all()
     return render(request, 'providerProfile.html', {'provider':provider, 'provider_imgs': provider_imgs})
@@ -33,11 +33,11 @@ def bookmarking(request, id):
              
         if created:
             # If created, bookmark didn't exist
-            print("Bookmark added.")
+            messages.success(request, 'You had bookmarked the event successfully!')
         else:
             # If existed, delete it
             bookmark_event.delete()
-            print("Bookmark removed.")
+            messages.success(request, 'Your bookmarked had been removed!')
 
 
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
