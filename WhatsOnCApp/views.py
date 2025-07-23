@@ -76,7 +76,6 @@ def detailView(request, id, *args, **kwargs):
             user = UserProfile.objects.get(user=request.user)
             bookmarke = Bookmarks.objects.filter(
             user=user, event=event).exists()
-
             if bookmarke:
                 bookmarked = True
             else:
@@ -115,7 +114,7 @@ def providerForm(request):
             image.provider=provider
             image.save()
             messages.success(request,'Your application had been sent successfully!')
-            return render(request,'success.html')
+            return redirect('WhatsOnCApp:home')
     else:
         formP=ProviderForm()
         formI=ProviderImgForm()
@@ -146,7 +145,7 @@ def eventForm(request):
             imageEvent.event=event
             imageEvent.save()
             messages.success(request,'Your event had been sent successfully!')
-            return render(request, 'success.html')
+            return redirect('WhatsOnCApp:home')
     else:
         formE= EventForm()
         formIE= EventImgForm()
