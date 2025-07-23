@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from .models import UserProfile, Bookmarks
-from WhatsOnCApp.models import Event, Provider
+from whatsoncapp.models import Event, Provider
 from django.contrib.auth.models import User
 from django.contrib import messages
 

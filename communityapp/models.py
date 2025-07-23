@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from WhatsOnCApp.models import Event
+from whatsoncapp.models import Event
 
 # Create your models here.
 

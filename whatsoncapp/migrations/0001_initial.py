@@ -50,7 +50,7 @@ class Migration(migrations.Migration):
                 ('vcode', models.CharField(max_length=10)),
                 ('description', models.TextField(blank=True, max_length=800)),
                 ('approved', models.BooleanField(default=False)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='WhatsOnCApp.category')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='whatsoncapp.category')),
             ],
         ),
         migrations.CreateModel(
@@ -73,7 +73,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('image', cloudinary.models.CloudinaryField(max_length=255, verbose_name='imageE')),
                 ('caption', models.CharField(max_length=200)),
-                ('event', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='event_img', to='WhatsOnCApp.event')),
+                ('event', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='event_img', to='whatsoncapp.event')),
             ],
         ),
         migrations.CreateModel(
@@ -82,12 +82,12 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('image', cloudinary.models.CloudinaryField(max_length=255, verbose_name='image')),
                 ('caption', models.CharField(max_length=200)),
-                ('provider', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='provider_img', to='WhatsOnCApp.provider')),
+                ('provider', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='provider_img', to='whatsoncapp.provider')),
             ],
         ),
         migrations.AddField(
             model_name='event',
             name='provider',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='WhatsOnCApp.provider'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='whatsoncapp.provider'),
         ),
     ]

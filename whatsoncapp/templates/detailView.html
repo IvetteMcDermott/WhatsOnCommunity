@@ -16,7 +16,7 @@
     {% endfor%}
     {% endif %}
     {% if request.user == event.provider.user %}
-    <form method="POST" action="{% url 'WhatsOnCApp:editEvent' event.id %}"> {% csrf_token %}
+    <form method="POST" action="{% url 'whatsoncapp:editEvent' event.id %}"> {% csrf_token %}
         <button type="submit" name="editPost" value="event.id">
             <i style="width: 2rem;"></i><small>Edit it</small>
         </button>
@@ -28,7 +28,7 @@
             <h1>{{ event.title }}</h1>
 
             {% if user.is_authenticated and not request.user.is_staff %}
-            <form method="POST" action="{% url 'CommunityApp:bookmark' event.id %}">
+            <form method="POST" action="{% url 'communityapp:bookmark' event.id %}">
                 {% csrf_token %}
                 {% if bookmarked %}
                 <button class="btnBM" type="submit" name="bookmark" value="{{event.id}}">
@@ -74,7 +74,7 @@
                     <td>provider</td>
                     <td> : </td>
                     <td class="ps-3">
-                        <a href="{% url 'CommunityApp:providerProfile' event.provider.id %}">🔍
+                        <a href="{% url 'communityapp:providerProfile' event.provider.id %}">🔍
                             {{event.provider }}
                         </a>
                     </td>

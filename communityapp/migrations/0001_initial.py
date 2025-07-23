@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('WhatsOnCApp', '0001_initial'),
+        ('whatsoncapp', '0001_initial'),
     ]
 
     operations = [
@@ -28,8 +28,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('tag', models.CharField(blank=True, max_length=100, null=True)),
-                ('event', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='WhatsOnCApp.event')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='user_bookmark', to='CommunityApp.userprofile')),
+                ('event', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='whatsoncapp.event')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='user_bookmark', to='communityapp.userprofile')),
             ],
         ),
     ]

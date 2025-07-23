@@ -11,28 +11,28 @@
         {% endif %}
         {% if user.is_staff %}
         <!-- if staff -->
-        <li><a class="dropdown-item" href="{% url 'WhatsOnCApp:controlPanel' %}">Control Panel</a></li>
+        <li><a class="dropdown-item" href="{% url 'whatsoncapp:controlPanel' %}">Control Panel</a></li>
         {% endif %}
         {% if user.is_authenticated %}
         <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
         {% if not user.is_staff %}
-        <li><a class="dropdown-item" href="{% url 'CommunityApp:userProfile' %}">My bookmarks</a></li>
+        <li><a class="dropdown-item" href="{% url 'communityapp:userProfile' %}">My bookmarks</a></li>
         {% if user.provider.approved %}
-        <li><a class="dropdown-item" href="{% url 'WhatsOnCApp:eventPost' %}">Post an Event</a></li>
+        <li><a class="dropdown-item" href="{% url 'whatsoncapp:eventPost' %}">Post an Event</a></li>
         <!-- if not staff either provider, so regular user -->
         {% else %}
         {% if not user.provider %}
-        <li><a class="dropdown-item" href="{% url 'WhatsOnCApp:providerRegistration' %}">Provider Registration</a></li>
+        <li><a class="dropdown-item" href="{% url 'whatsoncapp:providerRegistration' %}">Provider Registration</a></li>
         {% endif %}
         {% endif %}
         {% endif %}
         {% endif %}
         <!-- all users -->
-        <li><a class="dropdown-item" href="{% url 'WhatsOnCApp:calendar' %}">Calendar</a></li>
+        <li><a class="dropdown-item" href="{% url 'whatsoncapp:calendar' %}">Calendar</a></li>
         <!-- If user in session is logged -->
         <!-- if user is not staff and then check if is provider -->
         {% if not user.is_staff %}
-        <li><a class="dropdown-item" href="{% url 'WhatsOnCApp:contactUs' %}">Contact Us</a></li>
+        <li><a class="dropdown-item" href="{% url 'whatsoncapp:contactUs' %}">Contact Us</a></li>
         {% endif %}
     </ul>
 </div>

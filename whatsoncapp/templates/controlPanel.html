@@ -16,10 +16,10 @@
             {% for app in providersApps %}
             <tr>
                 <td>{{ app.id }}</td>
-                <td> <a href=" {% url 'CommunityApp:providerProfile' app.id %}">🔍 {{ app.name }}
+                <td> <a href=" {% url 'communityapp:providerProfile' app.id %}">🔍 {{ app.name }}
                 </td>
                 <td>
-                    <form class="d-inline-flex" method="POST" action="{% url 'WhatsOnCApp:approveProv' app.id %}">
+                    <form class="d-inline-flex" method="POST" action="{% url 'whatsoncapp:approveProv' app.id %}">
                         {% csrf_token %}
                         <label for="approved_{{app.id}}"></label>
                         <input type="checkbox" id="approved_{{app.id}}" name="approved" value="{{ app.id }}"
@@ -29,7 +29,7 @@
                 </td>
                 <td>
                     <form class="d-inline-flex" method="GET"
-                        action="{% url 'WhatsOnCApp:deleteProvApplication' app.id %}">
+                        action="{% url 'whatsoncapp:deleteProvApplication' app.id %}">
                         {% csrf_token %}
                         <label for="delete_{{app.id}}"></label>
                         <input type="checkbox" id="delete_{{app.id}}" name="application" value="{{ app.id }}"
@@ -54,10 +54,10 @@
             {% for app in eventsApps %}
             <tr>
                 <td>{{ app.id }}</td>
-                <td> <a href="{% url 'WhatsOnCApp:event' app.id %}">🔍 {{ app.title }}
+                <td> <a href="{% url 'whatsoncapp:event' app.id %}">🔍 {{ app.title }}
                 </td>
                 <td>
-                    <form method="POST" action="{% url 'WhatsOnCApp:approveEv' app.id %}" class="d-inline-flex">
+                    <form method="POST" action="{% url 'whatsoncapp:approveEv' app.id %}" class="d-inline-flex">
                         {% csrf_token %}
                         <label for="approved_{{app.id}}"></label>
                         <input type="checkbox" id="approved_{{app.id}}" name="approved" value="{{ app.id }}"
@@ -67,7 +67,7 @@
                 </td>
                 <td>
                     <form class="d-inline-flex" method="GET"
-                        action="{% url 'WhatsOnCApp:deleteEventApplication' app.id %}">
+                        action="{% url 'whatsoncapp:deleteEventApplication' app.id %}">
                         {% csrf_token %}
                         <label for="delete_{{app.id}}"></label>
                         <input type="checkbox" id="delete_{{app.id}}" name="application" value="{{ app.id }}"
@@ -95,10 +95,10 @@
                 <td>{{ message.id }}</td>
                 <td style="margin-right: 0.8rem;">{{ message.sent_at|date:"d-m" }}</td>
                 <td>
-                    <a href="{% url 'WhatsOnCApp:messageCU' message.id %}">🔍 {{ message.subject }}</a>
+                    <a href="{% url 'whatsoncapp:messageCU' message.id %}">🔍 {{ message.subject }}</a>
                 </td>
                 <td>
-                    <form method="POST" action="{% url 'WhatsOnCApp:solvedCU' message.id %}" class="d-inline-flex">
+                    <form method="POST" action="{% url 'whatsoncapp:solvedCU' message.id %}" class="d-inline-flex">
                         {% csrf_token %}
                         <label for="solved_{{message.id}}"></label>
                         <input type="checkbox" id="solved_{{message.id}}" name="solved" value="{{ message.id }}">

@@ -9,7 +9,7 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 
-from CommunityApp.models import Bookmarks, UserProfile
+from communityapp.models import Bookmarks, UserProfile
 
 from .forms import ProviderForm,ProviderImgForm, EventForm, EventImgForm, CategoryForm, ContactUsForm, SolvedCU, EditEventForm
 from django.contrib.auth.models import User
@@ -114,7 +114,7 @@ def providerForm(request):
             image.provider=provider
             image.save()
             messages.success(request,'Your application had been sent successfully!')
-            return redirect('WhatsOnCApp:home')
+            return redirect('whatsoncapp:home')
     else:
         formP=ProviderForm()
         formI=ProviderImgForm()
@@ -145,7 +145,7 @@ def eventForm(request):
             imageEvent.event=event
             imageEvent.save()
             messages.success(request,'Your event had been sent successfully!')
-            return redirect('WhatsOnCApp:home')
+            return redirect('whatsoncapp:home')
     else:
         formE= EventForm()
         formIE= EventImgForm()
@@ -165,7 +165,7 @@ def contactUsForm(request):
             form.save()
             messages.success(request,'Your enquiry had been sent successfully!')
             formCU = ContactUsForm()
-            return redirect('WhatsOnCApp:home')
+            return redirect('whatsoncapp:home')
         else:
             form = ContactUsForm()
             return render(request, 'contactUs.html', {'formCU': formCU})
@@ -193,7 +193,7 @@ def solvedContactUs(request, id):
 
         else:
             message.solved=False
-    return redirect('WhatsOnCApp:controlPanel') 
+    return redirect('whatsoncapp:controlPanel') 
 
 @staff_member_required
 def ApproveProv(request, id):
@@ -207,7 +207,7 @@ def ApproveProv(request, id):
             messages.success(request,'Provider approved successfully!')
         else:
             provider.approved=False
-    return redirect('WhatsOnCApp:controlPanel') 
+    return redirect('whatsoncapp:controlPanel') 
 
 @staff_member_required
 def ApproveEv(request, id):
@@ -221,7 +221,7 @@ def ApproveEv(request, id):
             messages.success(request,'Event approved successfully!')
         else:
             event.approved=False
-    return redirect('WhatsOnCApp:controlPanel') 
+    return redirect('whatsoncapp:controlPanel') 
 
 def deleteProvApplication(request, id):
 
@@ -229,7 +229,7 @@ def deleteProvApplication(request, id):
         provider=get_object_or_404(Provider, id=id)
         provider.delete()
         messages.success(request,'Provider application deleted!')
-    return redirect('WhatsOnCApp:controlPanel') 
+    return redirect('whatsoncapp:controlPanel') 
 
 def deleteEventApplication(request, id):
 
@@ -237,7 +237,7 @@ def deleteEventApplication(request, id):
         event= get_object_or_404(Event, id=id)
         event.delete()
         messages.success(request,'Event application deleted!')
-    return redirect('WhatsOnCApp:controlPanel') 
+    return redirect('whatsoncapp:controlPanel') 
 
 @staff_member_required
 def controlPanel(request):
