@@ -16,7 +16,7 @@
         {% if user.is_authenticated %}
         <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
         {% if not user.is_staff %}
-        <li><a class="dropdown-item" href="{% url 'CommunityApp:userProfile' %}">My Profile</a></li>
+        <li><a class="dropdown-item" href="{% url 'CommunityApp:userProfile' %}">My bookmarks</a></li>
         {% if user.provider.approved %}
         <li><a class="dropdown-item" href="{% url 'WhatsOnCApp:eventPost' %}">Post an Event</a></li>
         <!-- if not staff either provider, so regular user -->

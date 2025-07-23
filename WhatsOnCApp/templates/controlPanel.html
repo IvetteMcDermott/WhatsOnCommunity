@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h3>CONTROL PANEL</h3>
+<h3 class=" page-title"><i class="fa-solid fa-location-dot" style="color: #fe7f2d;"></i>CONTROL PANEL</h3>
 
 <div class="controlPanelDiv">
     <h5>Providers Applications</h5>
@@ -11,11 +11,12 @@
         <table>
             <th style="width:25%;">Id</th>
             <th style="width:35%;">Name</th>
-            <th style="width:75%; align-items: end;">Approve</th>
+            <th style="width:75%;">Approve</th>
+            <th style="width:75%;">Delete</th>
             {% for app in providersApps %}
             <tr>
                 <td>{{ app.id }}</td>
-                <td> <a href="{% url 'CommunityApp:providerProfile' app.id %}"> {{ app.name }}
+                <td> <a href=" {% url 'CommunityApp:providerProfile' app.id %}">🔍 {{ app.name }}
                 </td>
                 <td>
                     <form class="d-inline-flex" method="POST" action="{% url 'WhatsOnCApp:approveProv' app.id %}">
@@ -23,7 +24,7 @@
                         <label for="approved_{{app.id}}"></label>
                         <input type="checkbox" id="approved_{{app.id}}" name="approved" value="{{ app.id }}"
                             style="margin-right: 0.5rem;">
-                        <button type="submit">Approved</button>
+                        <button type="submit">Approve</button>
                     </form>
                 </td>
                 <td>
@@ -33,7 +34,7 @@
                         <label for="delete_{{app.id}}"></label>
                         <input type="checkbox" id="delete_{{app.id}}" name="application" value="{{ app.id }}"
                             style="margin-right: 0.5rem;">
-                        <button type="submit">Delete Appl</button>
+                        <button type="submit">Delete Applic.</button>
                     </form>
                 </td>
             </tr>
@@ -49,10 +50,11 @@
             <th style="width:25%;">Id</th>
             <th style="width:35%;">Name</th>
             <th style="width:75%; align-items: end;">Approve</th>
+            <th style="width:75%; align-items: end;">Delete</th>
             {% for app in eventsApps %}
             <tr>
                 <td>{{ app.id }}</td>
-                <td> <a href="{% url 'WhatsOnCApp:event' app.id %}"> {{ app.title }}
+                <td> <a href="{% url 'WhatsOnCApp:event' app.id %}">🔍 {{ app.title }}
                 </td>
                 <td>
                     <form method="POST" action="{% url 'WhatsOnCApp:approveEv' app.id %}" class="d-inline-flex">
@@ -60,7 +62,7 @@
                         <label for="approved_{{app.id}}"></label>
                         <input type="checkbox" id="approved_{{app.id}}" name="approved" value="{{ app.id }}"
                             style="margin-right: 0.5rem;">
-                        <button type="submit">Approved</button>
+                        <button type="submit">Approve</button>
                     </form>
                 </td>
                 <td>
@@ -93,7 +95,7 @@
                 <td>{{ message.id }}</td>
                 <td style="margin-right: 0.8rem;">{{ message.sent_at|date:"d-m" }}</td>
                 <td>
-                    <a href="{% url 'WhatsOnCApp:messageCU' message.id %}">{{ message.subject }}</a>
+                    <a href="{% url 'WhatsOnCApp:messageCU' message.id %}">🔍 {{ message.subject }}</a>
                 </td>
                 <td>
                     <form method="POST" action="{% url 'WhatsOnCApp:solvedCU' message.id %}" class="d-inline-flex">

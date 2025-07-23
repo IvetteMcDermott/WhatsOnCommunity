@@ -4,14 +4,14 @@
                 width="85px" height="85px" alt="logo"></a></div>
     <div>
         <div>
-            <h2 class="d-flex justify-content-end align-content-center">{% if user.is_authenticated %} <i
-                    class="fas fa-user"></i>
-
-                {{ user.username }}
-
+            <h2 class="d-flex justify-content-end align-content-center">
+                {% if user.is_authenticated %}
                 {% if user.provider.approved %}
-                Provider
+                <i class="fa-solid fa-id-badge"></i>
+                {% else %}
+                <i class="fas fa-user"></i>
                 {% endif %}
+                {{ user.username }}
                 {% else %} <i class="fas fa-user-slash"></i> {% endif %}
             </h2>
 

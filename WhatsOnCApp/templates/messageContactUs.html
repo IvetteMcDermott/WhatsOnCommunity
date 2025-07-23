@@ -1,28 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h3>MESSAGE</h3>
+<h3 class=" page-title"><i class="fa-solid fa-location-dot" style="color: #fe7f2d;"></i>INCOMING MESSAGE</h3>
 <div class="cardBookmark">
-    <table>
+    <div class="w-100 d-flex justify-content-end">Id : {{message.id}}</div>
+    <table class="w-100">
         <tr>
-            <td>Sender :</td>
-            <td>{{ message.name }}</td>
-        <tr>
-            <td>Sent On :</td>
-            <td>{{ message.sent_at }}</td>
-        </tr>
-        <tr>
-            <td>Subject :</td>
+            <td>Subject </td>
+            <td>:</td>
             <td>{{ message.subject }} </td>
         </tr>
+
         <tr>
-            <td>Message :</td>
-            <td>{{ message.description|truncatewords:10 }}</td>
+            <td>Date </td>
+            <td>:</td>
+            <td>{{ message.sent_at }} </td>
+        </tr>
+        <tr>
+            <td>Sender </td>
+            <td>:</td>
+            <td>{{ message.name }}</td>
+        <tr>
+            <td>Email </td>
+            <td>:</td>
+            <td>{{ message.email }}</td>
+        </tr>
+        <tr>
+            <td>Message </td>
+            <td>:</td>
+            <td>{{ message.description }}</td>
         </tr>
 
 
     </table>
 </div>
-<a id="theBtn" href='{% url "WhatsOnCApp:controlPanel" %}'>back</a>
+<a id="theBtn" href='{% url "WhatsOnCApp:controlPanel" %}'><i class="fa-solid fa-backward-step"
+        style="color: #233d4d;"></i> BACK</a>
 
 {% endblock %}

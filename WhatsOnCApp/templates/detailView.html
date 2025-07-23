@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<h3 class="mt-4 ms-3">Event Details</h3>
+<h3 class="mt-4 ms-3 page-title"><i class="fa-solid fa-location-dot" style="color: #fe7f2d;"></i>Event Details</h3>
 <div class="d-flex" id="eventDiv">
     {% if event_images %}
     {% for image in event_images %}
@@ -31,12 +31,12 @@
             <form method="POST" action="{% url 'CommunityApp:bookmark' event.id %}">
                 {% csrf_token %}
                 {% if bookmarked %}
-                <button type="submit" name="bookmark" value="{{event.id}}">
-                    <i style="width: 2rem;" class="fa-regular fa-bookmark fa-2x"></i><small>Bookmarked</small>
+                <button class="btnBM" type="submit" name="bookmark" value="{{event.id}}">
+                    <i class="fa-solid fa-bookmark fa-2x"></i><small></small>
                 </button>
                 {% else %}
-                <button type="submit" name="bookmark" value="event.id">
-                    <i style="width: 2rem;" class="fa-regular fa-bookmark fa-2x"></i><small>Bookmark it</small>
+                <button class="btnBM" type="submit" name="bookmark" value="event.id">
+                    <i class="fa-regular fa-bookmark fa-2x"></i><small></small>
                 </button>
                 {% endif %}
             </form>
@@ -74,7 +74,8 @@
                     <td>provider</td>
                     <td> : </td>
                     <td class="ps-3">
-                        <a href="{% url 'CommunityApp:providerProfile' event.provider.id %}"> {{ event.provider }}
+                        <a href="{% url 'CommunityApp:providerProfile' event.provider.id %}">🔍
+                            {{event.provider }}
                         </a>
                     </td>
                 </tr>

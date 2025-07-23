@@ -5,9 +5,9 @@
 {% endblock %}
 
 {% block content %}
-<h3>event form</h3>
+<h3 class=" page-title"><i class="fa-solid fa-location-dot" style="color: #fe7f2d;"></i>event form</h3>
 
-<div style="width: 80vw; margin-left: 10%;">
+<div style="width: 80%; margin-left: 10%;">
 
     <form method="POST" id="" enctype="multipart/form-data">
         {% csrf_token %}
@@ -17,7 +17,7 @@
         <!-- edit form -->
         {{ form | crispy }}
 
-        <button type="submit">Save</button>
+        <button type="submit">Submit</button>
 
     </form>
 

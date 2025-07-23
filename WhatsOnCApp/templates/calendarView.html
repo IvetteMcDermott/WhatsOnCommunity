@@ -21,7 +21,7 @@
 {% endblock %}
 
 {% block content %}
-<h3 class="mt-4 ms-3">Calendar</h3>
+<h3 class="mt-4 ms-3 page-title"><i class="fa-solid fa-location-dot" style="color: #fe7f2d;"></i>Calendar</h3>
 <div id="searchCat">
     <form id="formCat" method="GET">
         {% csrf_token %}
@@ -140,10 +140,14 @@
                     title: '📢 Port says:',
                     html: `
         <div class="swal-left-align">
-            <b>📌 Title:</b> <a href="/event/${id}/">${info.event.title || ''}</a><br>
-            <b>📍 Location:</b> ${props.location || ''}<br>
-            <b>📅 Date:</b> ${props.when}<br>
-            <b>🕒 Time:</b> ${props.time}<br>
+            <div class="swal-mytitle">
+
+            <b>🔍 </b> <a href="/event/${id}/">${info.event.title || ''}</a><br>
+            </div>
+            <b>🗂️ </b> ${props.category || ''}<br>
+            <b>📍 </b> ${props.location || ''}<br>
+            <b>📅 </b> ${props.when}<br>
+            <b>🕒 </b> ${props.time}<br>
         </div>
     `,
                 });

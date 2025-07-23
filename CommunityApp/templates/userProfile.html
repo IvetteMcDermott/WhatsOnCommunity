@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<h3>My Bookmarks</h3>
+<h3 class=" page-title">My Bookmarks</h3>
 
 
 <div class="d-flex flex-wrap justify-content-evenly">
@@ -14,7 +14,7 @@
 
     {% for bookmark in bookmarks %}
     <div class="cardBookmark">
-        <a href="{% url 'WhatsOnCApp:event' bookmark.event.id %}"> {{ bookmark.event.title }} </a>
+        <a href="{% url 'WhatsOnCApp:event' bookmark.event.id %}"> 🔍 {{ bookmark.event.title }} </a>
         <table>
             <tr>
                 <td>
@@ -41,6 +41,8 @@
         </table>
     </div>
     {% endfor %}
+    {% else %}
+    <h4 style="margin-top: 2rem;">You haven't bookmark any event</h4>
     {% endif %}
 </div>
 
