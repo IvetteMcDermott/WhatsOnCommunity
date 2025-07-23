@@ -22,8 +22,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('', include('WhatsOnCApp.urls'), name="WhatsOnCApp"),
-    path('', include('CommunityApp.urls'), name="Community"),
+    path('', include('whatsoncapp.urls'), name="whatsoncapp"),
+    path('', include('communityapp.urls'), name="community"),
 ]
 
 if settings.DEBUG:

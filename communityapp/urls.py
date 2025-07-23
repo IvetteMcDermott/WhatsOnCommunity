@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-app_name="CommunityApp"
+app_name="communityapp"
 
 urlpatterns=[path('userProfile/', views.userProfile, name="userProfile"),
              path('providerProfile/<int:id>', views.providerProfile, name="providerProfile"),
