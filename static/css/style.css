@@ -1,0 +1,451 @@
+/* VARS */
+:root {
+  --blue: #233d4d;
+  --orange: #fe7f2d;
+  --yellow: #fcca46;
+  --lgreen: #a1c181;
+  --dgreen: #619b8a;
+  --offwhite: #f9faf6;
+}
+
+html {
+  height: 100%;
+  padding: 5px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--offwhite);
+  color: var(--blue);
+}
+
+.wrapper {
+  flex: 1;
+}
+
+footer {
+  margin-top: 20px;
+}
+
+/* HEADER LOGO */
+#headerLogo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.fas,
+.fa-solid {
+  margin-right: 3px !important;
+}
+
+.page-title {
+  margin-left: 5px !important;
+  text-transform: uppercase;
+}
+
+.dropdown-item,
+table * {
+  color: var(--blue) !important;
+  text-decoration: none;
+}
+
+/* ALLAUTH */
+.allauth-wrapper {
+  width: 90%;
+  margin-left: 5%;
+}
+
+/* MESSAGES */
+.message {
+  z-index: 1000 !important;
+}
+
+/* App Styling */
+
+select,
+input,
+textarea {
+  border-radius: 3px !important;
+  border: inset !important;
+}
+
+h1,
+h2,
+h4,
+p {
+  text-align: center;
+}
+
+footer {
+  margin-bottom: 0.5rem;
+}
+
+/* INDEX PAGE */
+#indexPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 1rem;
+  font-size: large;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgb(209, 208, 208);
+}
+
+.image-stack {
+  width: 80%;
+  margin-top: 3rem;
+  clear: both;
+  line-height: 0;
+  column-count: 4;
+  column-gap: 0;
+  column-count: 2;
+  display: none;
+}
+
+.image-stack img {
+  width: 100%;
+}
+
+/* DETAIL EVENT */
+#eventDiv {
+  flex-direction: column;
+}
+
+#eventImageCss {
+  width: 80%;
+  height: auto;
+  margin: 5% 10%;
+}
+
+#title {
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+}
+
+#eventExtraDiv p {
+  padding: 0 2rem;
+  text-align: left;
+}
+
+#dataDiv {
+  padding: 2rem;
+}
+
+/* Forms */
+form button {
+  background-color: var(--lgreen) !important;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+form button:hover {
+  background-color: var(--blue) !important;
+  color: var(--lgreen) !important;
+  font-weight: 700;
+}
+
+/* CALENDAR OVERWRITE STYLING */
+#searchCat {
+  padding: 1rem;
+}
+
+.fc-cell-shaded {
+  background-color: var(--dgreen) !important;
+}
+.fc-list-day-text,
+.fc-list-day-side-text {
+  color: var(--yellow) !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  text-shadow: 1px 1px 1px var(--blue), -1px -1px 1px var(--blue) !important;
+  text-decoration: none !important;
+}
+
+.fc-toolbar-chunk {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 5px 0 5px 0;
+}
+
+.fc .fc-toolbar {
+  justify-content: space-evenly;
+}
+
+.fc-dayGridMonth-button,
+.fc-dayGridWeek-button {
+  display: none !important;
+}
+
+.fc--button {
+  display: none !important;
+}
+
+.fc-button:hover {
+  background-color: #e3e4e1 !important;
+}
+
+.fc-prev-button,
+.fc-next-button {
+  box-shadow: none !important;
+}
+
+.dropdown-menu {
+  border: outset !important;
+}
+
+#theBtn {
+  text-decoration: none;
+  width: 6rem !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#theBtn:hover {
+  background-color: var(--blue) !important;
+  color: var(--lgreen) !important;
+  font-weight: 700;
+}
+
+.cardBookmark,
+#theBtn,
+button,
+.fc-button-primary,
+.btnStyle {
+  background-color: var(--offwhite) !important;
+  color: var(--blue) !important;
+  margin: 0 !important;
+  padding: 0.5 !important;
+  border-radius: 5px !important;
+  border: outset !important;
+  width: 5rem !important;
+  font-size: small !important;
+}
+
+.swal2-confirm:hover,
+.btnStyle:hover {
+  background-color: var(--blue) !important;
+  color: var(--lgreen) !important;
+  font-weight: 700;
+}
+
+.btnBM {
+  width: fit-content !important;
+  height: fit-content;
+  padding: 5px;
+}
+
+.btnBM i {
+  margin: 0 !important;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active:focus {
+  box-shadow: none;
+  border: inset !important;
+  box-shadow: none;
+  background-color: var(--lgreen) !important;
+  color: var(--blue) !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+}
+
+.fc-list-empty {
+  background: var(--lgreen) !important;
+}
+
+.fc-list-empty-cushion {
+  font-weight: 500;
+  font-size: larger;
+  text-transform: uppercase;
+}
+
+.fc-list-event-dot {
+  display: none !important;
+}
+
+.fc-list-event-title:before {
+  content: "🔍";
+}
+
+.fc-list-event-title {
+  text-transform: uppercase;
+}
+
+#formCat {
+  display: flex;
+}
+
+#catLabel {
+  align-content: center;
+}
+
+#categorySelect {
+  width: 15rem;
+}
+
+.cardBookmark {
+  width: 80% !important;
+  max-width: 30rem;
+  height: auto;
+  border: inset !important;
+  border-radius: 3px !important;
+  padding: 1rem;
+  margin: 1rem !important;
+}
+
+/* SWEET ALERT STYLE OVERRIDE */
+
+.swal2-popup {
+  padding: 2rem !important;
+  color: var(--blue);
+}
+
+.swal-left-align a {
+  color: var(--yellow) !important;
+
+  text-transform: uppercase !important;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.swal2-title {
+  display: none !important;
+}
+
+.swal-mytitle {
+  margin-bottom: 1rem;
+  background-color: var(--dgreen);
+  color: var(--yellow) !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  text-shadow: 1px 1px 1px var(--blue), -1px -1px 1px var(--blue) !important;
+  text-decoration: none !important;
+}
+
+.swal-mytitle span {
+  right: 5px !important;
+}
+
+/* MY BOOKMARKS */
+.cardBookmark a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--orange);
+}
+
+/* CONTROL PANEL */
+h5 {
+  margin-left: 5%;
+}
+
+.controlPanelDiv {
+  margin-top: 2rem;
+  min-height: 70vh !important;
+  margin-bottom: 2rem;
+}
+
+.sectionsCP {
+  width: 90% !important;
+  max-width: 100rem;
+  height: 30% !important;
+  border: inset !important;
+  border-radius: 3px !important;
+  padding: 1rem;
+  margin-left: 5% !important;
+  margin-bottom: 1rem !important;
+  overflow: auto;
+}
+
+.sectionsCP table td a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 600 !important;
+  letter-spacing: 1px !important;
+  color: var(--orange) !important;
+}
+
+/* MEDIA QUERIES FOR BREAK POINTS */
+@media screen and (min-width: 766px) {
+  .image-stack {
+    display: block;
+  }
+
+  #logo {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .allauth-wrapper {
+    width: 70%;
+    margin-left: 15%;
+  }
+
+  .fc-dayGridMonth-button,
+  .fc-dayGridWeek-button {
+    width: 10rem !important;
+    display: block !important;
+  }
+
+  #indexPage {
+    min-height: 80vh;
+  }
+
+  #indexP {
+    width: 70%;
+  }
+
+  .image-stack {
+    column-count: 3;
+  }
+
+  #eventDiv {
+    flex-direction: row;
+  }
+
+  #eventImageCss {
+    width: 100%;
+    height: auto;
+    margin: 5% 10%;
+  }
+
+  .eventSDiv {
+    width: 50%;
+  }
+
+  #dataDiv {
+    padding-right: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end !important;
+  }
+
+  #eventExtraDiv {
+    width: 70%;
+    margin-left: 15%;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  body {
+    width: 80%;
+    margin-left: 10%;
+  }
+  #calendar {
+    width: 80%;
+    margin-left: 10%;
+  }
+}
