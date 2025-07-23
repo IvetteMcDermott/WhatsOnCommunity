@@ -6,44 +6,46 @@
 
 {% block content %}
 
-<h3 class=" page-title">My Bookmarks</h3>
+<h3 class="mt-4 ms-3 page-title"><i class="fa-solid fa-location-dot" style="color: #fe7f2d;"></i>My Bookmarks</h3>
 
+<div style="width: 80%; margin-left: 10%;">
 
-<div class="d-flex flex-wrap justify-content-evenly">
-    {% if bookmarks %}
+    <div class="d-flex flex-wrap justify-content-evenly">
+        {% if bookmarks %}
 
-    {% for bookmark in bookmarks %}
-    <div class="cardBookmark">
-        <a href="{% url 'WhatsOnCApp:event' bookmark.event.id %}"> 🔍 {{ bookmark.event.title }} </a>
-        <table>
-            <tr>
-                <td>
-                    Location </td>
-                <td> : </td>
-                <td class="ps-3">{{ bookmark.event.location }}</td>
-            </tr>
-            <tr>
-                <td>Date</td>
-                <td> : </td>
-                <td class="ps-3">{{ bookmark.event.startDate }}</td>
-            </tr>
-            <tr>
-                <td>Time </td>
-                <td> : </td>
-                <td class="ps-3">{{ bookmark.event.startTime }}</td>
-            </tr>
+        {% for bookmark in bookmarks %}
+        <div class="cardBookmark">
+            <a href="{% url 'WhatsOnCApp:event' bookmark.event.id %}"> 🔍 {{ bookmark.event.title }} </a>
+            <table>
+                <tr>
+                    <td>
+                        Location </td>
+                    <td> : </td>
+                    <td class="ps-3">{{ bookmark.event.location }}</td>
+                </tr>
+                <tr>
+                    <td>Date</td>
+                    <td> : </td>
+                    <td class="ps-3">{{ bookmark.event.startDate }}</td>
+                </tr>
+                <tr>
+                    <td>Time </td>
+                    <td> : </td>
+                    <td class="ps-3">{{ bookmark.event.startTime }}</td>
+                </tr>
 
-            <tr>
-                <td>provider</td>
-                <td> : </td>
-                <td class="ps-3">{{ bookmark.event.provider }}</td>
-            </tr>
-        </table>
+                <tr>
+                    <td>provider</td>
+                    <td> : </td>
+                    <td class="ps-3">{{ bookmark.event.provider }}</td>
+                </tr>
+            </table>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h4 style="margin-top: 2rem;">You haven't bookmarked any event yet</h4>
+        {% endif %}
     </div>
-    {% endfor %}
-    {% else %}
-    <h4 style="margin-top: 2rem;">You haven't bookmark any event</h4>
-    {% endif %}
 </div>
 
 

@@ -6,63 +6,65 @@
 
 {% block content %}
 
-<h3>providers profile</h3>
+<h3 class="mt-4 ms-3 page-title"><i class="fa-solid fa-location-dot" style="color: #fe7f2d;"></i>providers profile</h3>
+<div style="width: 80%; margin-left: 10%;">
 
-<div>
-    {% if provider_imgs %}
-    {% for img in provider_imgs %}
-    <div class="eventSDiv ">
-        <img src="{{img.image.url}}" alt="{{ provider.name }}" id="eventImageCss">
-        <p>{{ image.id}}</p>
+    <div>
+        {% if provider_imgs %}
+        {% for img in provider_imgs %}
+        <div class="eventSDiv ">
+            <img src="{{img.image.url}}" alt="{{ provider.name }}" id="eventImageCss">
+            <p>{{ image.id}}</p>
+
+        </div>
+
+        {% endfor%}
+        {% endif %}
 
     </div>
+    <div>
+        <table>
+            <tr>
+                <td>
+                    Name </td>
+                <td> : </td>
+                <td class="ps-3"> {{ provider.name}}
+                </td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td> : </td>
+                <td class="ps-3"> {{ provider.phone}}
+                </td>
+            </tr>
+            <tr>
+                <td>Email </td>
+                <td> : </td>
+                <td class="ps-3"> {{ provider.email}}
+                </td>
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td> : </td>
+                <td class="ps-3"> {{ provider.location}}
+                </td>
+            </tr>
+            <tr>
+                <td>VCode</td>
+                <td> : </td>
+                <td class="ps-3"> {{ provider.vcode}}
+                </td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td> : </td>
+                <td class="ps-3">
+                    {{ provider.description}}
 
-    {% endfor%}
-    {% endif %}
-
-</div>
-<div>
-    <table>
-        <tr>
-            <td>
-                Name </td>
-            <td> : </td>
-            <td class="ps-3"> {{ provider.name}}
-            </td>
-        </tr>
-        <tr>
-            <td>Phone</td>
-            <td> : </td>
-            <td class="ps-3"> {{ provider.phone}}
-            </td>
-        </tr>
-        <tr>
-            <td>Email </td>
-            <td> : </td>
-            <td class="ps-3"> {{ provider.email}}
-            </td>
-        </tr>
-        <tr>
-            <td>Location</td>
-            <td> : </td>
-            <td class="ps-3"> {{ provider.location}}
-            </td>
-        </tr>
-        <tr>
-            <td>VCode</td>
-            <td> : </td>
-            <td class="ps-3"> {{ provider.vcode}}
-            </td>
-        </tr>
-        <tr>
-            <td>Description</td>
-            <td> : </td>
-            <td class="ps-3">
-                {{ provider.description}}
-
-            </td>
-        </tr>
-    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 </div>
 {% endblock %}

@@ -6,10 +6,14 @@
         <div>
             <h2 class="d-flex justify-content-end align-content-center">
                 {% if user.is_authenticated %}
+                {% if user.is_staff %}
+                <i class="fa-solid fa-user-tie"></i>
+                {% else %}
                 {% if user.provider.approved %}
                 <i class="fa-solid fa-id-badge"></i>
                 {% else %}
                 <i class="fas fa-user"></i>
+                {% endif %}
                 {% endif %}
                 {{ user.username }}
                 {% else %} <i class="fas fa-user-slash"></i> {% endif %}
