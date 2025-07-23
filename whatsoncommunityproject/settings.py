@@ -52,8 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "crispy_forms",
      'crispy_bootstrap5', 
-    'WhatsOnCApp',
-    'CommunityApp'
+    'whatsoncapp',
+    'communityapp'
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -72,7 +72,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'WhatsOnCommunityProject.urls'
+ROOT_URLCONF = 'whatsoncommunityproject.urls'
 
 TEMPLATES = [
     {
@@ -109,7 +109,7 @@ ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
-WSGI_APPLICATION = 'WhatsOnCommunityProject.wsgi.application'
+WSGI_APPLICATION = 'whatsoncommunityproject.wsgi.application'
 
 
 # Database
