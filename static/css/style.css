@@ -112,8 +112,8 @@ footer {
 }
 
 /* DETAIL EVENT */
-#eventDiv {
-  flex-direction: column;
+#imgDiv {
+  flex-direction: column !important;
 }
 
 #eventImageCss {
@@ -411,10 +411,6 @@ h5 {
     column-count: 3;
   }
 
-  #eventDiv {
-    flex-direction: row;
-  }
-
   #eventImageCss {
     width: 100%;
     height: auto;
@@ -444,6 +440,7 @@ h5 {
     width: 80%;
     margin-left: 10%;
   }
+
   #calendar {
     width: 80%;
     margin-left: 10%;

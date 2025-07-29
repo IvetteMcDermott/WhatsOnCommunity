@@ -9,17 +9,18 @@
 <h3 class="mt-4 ms-3 page-title"><i class="fa-solid fa-location-dot" style="color: #fe7f2d;"></i>providers profile</h3>
 <div style="width: 80%; margin-left: 10%;">
 
-    <div>
+    <div style=" margin-bottom: 1.5rem;">
         {% if provider_imgs %}
         {% for img in provider_imgs %}
         <div class="eventSDiv ">
-            <img src="{{img.image.url}}" alt="{{ provider.name }}" id="eventImageCss">
+            <img src=" {{img.image.url}}" alt="{{ provider.name }}" id="eventImageCss">
             <p>{{ image.id}}</p>
-
         </div>
 
         {% endfor%}
         {% endif %}
+        <small>Images from <a href="https://www.freepik.com" target="_blank"
+                rel="noopener noreferrer">www.freepik.com</a></small>
 
     </div>
     <div>
